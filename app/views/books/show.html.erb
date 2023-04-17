@@ -61,7 +61,7 @@
               <p>コメント内容　<%= book_comment.comment %></p>
               <p>
               <% if book_comment.user == current_user %>
-                <%= link_to "Destroy", book_book_comment_path(book_comment.book, book_comment), method: :delete, data: { confirm: '本当に消しますか？' } %>
+                <%= link_to "Destroy", book_book_comment_path(book_comment.book, book_comment), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger" %>
               <% end %>
               </p>
             <!--(book_comment.book, book_comment)の意味=>book_comment.bookは上の「book_comment」の引数のbookとコメントのURLをメソッドに記載-->
