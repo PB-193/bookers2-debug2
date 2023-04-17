@@ -11,11 +11,10 @@ class BookCommentsController < ApplicationController
   end
 
   def destroy
-    @book = Book.find(params[:book_id])
-    @comment = current_user.book_comments.find_by(book_comment_params)
-    @comment.book.id = @book.id
-    @book.destroy
-    redirect_to book_path(@book)
+    BookComment.find(params[:id]).destroy
+    # @bookcomment=BookComment.find(params[:id])と@bookcomment.destroyの短縮系である。
+    # ここの(oarams[:id])はコメントモデルのidである。コメントのidをfindする、そしてdestroyする。
+    redirect_to book_path(params[:book_id])
   end
 
 
