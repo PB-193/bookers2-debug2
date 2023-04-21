@@ -1,0 +1,11 @@
+<tr>
+  <td>
+    <%= form_with model: [book, book_comment] do |f| %>
+    <!--コメントは、post_imageに結びついたpost_commentであるため、配列で変数を2つ用意する必要があります-->
+      <%= f.text_area :comment, rows: '4', class:"w-100" ,placeholder: "コメントをここに" %>
+      <td>
+        <%= f.submit "送信する" %>
+      </td>
+    <% end %>
+  </td>
+</tr>

@@ -6,8 +6,11 @@ class BookCommentsController < ApplicationController
     # 新しいコメントを生成して、変数「@comment」へ格納する。下記のストロングパラメータで指定した（:comment）のみ許可している。
     @comment.book_id = @book.id
     # 先ほど生成したコメントの投稿ID（※このbook_idはカラム）（左）に、１行目のパラメータで渡された投稿ID（右）を設定する。
-    @comment.save
-    redirect_to book_path(@book)
+    if @comment.save
+      redirect_to book_path(@book), notice: "You have created comment successfully."
+    else
+      render :index
+    end
   end
 
   def destroy
