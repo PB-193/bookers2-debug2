@@ -11,11 +11,11 @@ Rails.application.routes.draw do
   resources :users, only: [:index,:show,:edit,:update] do
     resource :relationships, only: [:create, :destroy]
   	get 'followings' => 'relationships#followings', as: 'followings'
+  	# /users/:user_id/followingsというURLを作成します。そして、これはrelationshipsコントローラのfollowingsアクションにルーティングされる。
   	get 'followers' => 'relationships#followers', as: 'followers'
+  	# フォロワーリストを見るためのルーティングを作成している
   end
 
-  
-  
   # いいね機能の場合は「1人のユーザーは1つの投稿に対して1回しかいいねできない」という仕様であるため、
   # destroyをする際にもユーザーidと投稿(book)idが分かれば、どのいいねを削除すればいいのかが特定できます。
   # そのため、いいねのidはURLに含める必要がない(params[:id]を使わなくても良い)ため、

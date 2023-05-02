@@ -42,12 +42,15 @@ class User < ApplicationRecord
   def follow(user)
     relationships.create(followed_id: user.id)
   end
-
+  #(user)はなくてもいいが、可読性を上げるために記載するべき　※この場合、ユーザがフォロしているかどうか判定する意味である
   def unfollow(user)
     relationships.find_by(followed_id: user.id).destroy
   end
+  # このメソッドでは、自分自身(self)が持っているrelationshipsという関連付けされたオブジェクトから、
+  # followed_idが引数で指定されたユーザーのIDと一致するレコードを探しています。そのレコードをfind_byメソッドで取得し、destroyメソッドで削除しています。
 
   def following?(user)
     followings.include?(user)
   end
+  #followingsという自分がフォローしているユーザーの集合に対して、include?メソッドを用いて、引数で渡されたユーザーが含まれているかどうかを判定しています。含まれている場合はtrueを、含まれていない場合はfalseを返します。
 end

@@ -1,5 +1,6 @@
 class RelationshipsController < ApplicationController
   before_action :authenticate_user!
+  #そのコントローラーのアクションにアクセスする前に、必ずユーザーがログイン済みであることを確認できるもの
   def create
     user = User.find(params[:user_id])
     current_user.follow(user)
@@ -15,6 +16,7 @@ class RelationshipsController < ApplicationController
   def followings
     user = User.find(params[:user_id])
 		@users = user.followings
+		# has_many :followings, through: :relationships, source: :followed 
   end
 
   def followers
