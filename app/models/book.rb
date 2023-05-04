@@ -12,8 +12,17 @@ class Book < ApplicationRecord
   validates :title,presence: true
   validates :body,{presence: true, length:{maximum: 200} }
   
-  def self.search(query)
-    search_result = self.ransack(title_cont: query).result
+def self.search_for(content, method)
+  if method == 'perfect'
+    Book.where('title = ?', content.to_s)
+  elsif method == 'forward'
+    Book.where('title LIKE ?', content.to_s + '%')
+  elsif method == 'backward'
+    Book.where('title LIKE ?', '%' + content.to_s)
+  else
+    Book.where('title LIKE ?', '%' + content.to_s + '%')
   end
+end
+
   
 end

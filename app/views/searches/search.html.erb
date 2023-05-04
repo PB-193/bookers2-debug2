@@ -1,0 +1,12 @@
+<!-- 検索結果の表示画面-->
+
+<% if @model == 'user' %>
+	<h3>Users search for "<%= @content %>"</h3>
+  <%= render 'users/index', users: @records %>
+<% elsif @model == 'book' %>
+	<h3>Books search for "<%= @content %>"</h3>
+  <%= render 'books/index', books: @records %>
+<% end %>
+
+<!-- [elsif]は複数の条件分岐を表現する際に使われる制御構文の1つです。最初は[if]の後に続く条件式がfalseである場合に次の elsif に移ります 
+     elsif の後に続く条件式が true である場合、そのブロックが実行されます。-->

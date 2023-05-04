@@ -32,6 +32,8 @@ class UsersController < ApplicationController
     params.require(:user).permit(:name, :introduction, :profile_image)
   end
 
+# 特定のアクションを実行する前に、現在のユーザーがそのアクションを実行する権限を持っているかどうかを確認するために使用されます。
+# このようにすることで、ユーザーが他のユーザーの情報を編集したり、削除したりすることを防ぎ、セキュリティを強化することができます。
   def ensure_correct_user
     @user = User.find(params[:id])
     unless @user == current_user

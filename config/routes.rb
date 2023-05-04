@@ -22,6 +22,8 @@ Rails.application.routes.draw do
   # resourcesではなくresourceを使ってURLに/:idを含めない形にしています。
   
   resources :users, only: [:index,:show,:edit,:update]
+  
+  get '/search', to: 'searches#search'
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

@@ -53,4 +53,20 @@ class User < ApplicationRecord
     followings.include?(user)
   end
   #followingsという自分がフォローしているユーザーの集合に対して、include?メソッドを用いて、引数で渡されたユーザーが含まれているかどうかを判定しています。含まれている場合はtrueを、含まれていない場合はfalseを返します。
+
+
+  #検索メソッド　検索分岐の
+  
+  def self.search_for(content, method)
+    if method == 'perfect'
+      User.where(name: content)
+    elsif method == 'forward'
+      User.where('name LIKE ?', content + '%')
+    elsif method == 'backward'
+      User.where('name LIKE ?', '%' + content)
+    else
+      User.where('name LIKE ?', '%' + content + '%')
+    end
+  end
+
 end
