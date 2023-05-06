@@ -1,0 +1,17 @@
+  <% if book.favorited_by?(current_user) %>
+  <td>
+    <%= link_to book_favorites_path(book), method: :delete, remote: true do %>
+    <!-- link_to内にremote; true を追加。これにより、HTMLリクエストではなく、JavaScriptのリクエストがfavoritesコントローラに送られる-->
+      ♥<%= book.favorites.count %>
+    <% end %>
+  </td>
+  <% else %>
+  <td>
+    <%= link_to book_favorites_path(book), method: :post, remote: true do %>
+    <!-- link_to内にremote; true を追加。これにより、HTMLリクエストではなく、JavaScriptのリクエストがfavoritesコントローラに送られる
+        通常のHTMLリクエストの場合 → データベースにいいねを保存or削除し、画面にリダイレクトする(ページを読み込む)
+        JavaScriptリクエストの場合 → データベースにいいねを保存or削除し、JavaScriptを使っていいね部分のみ更新する(ページ読み込みなし)-->
+      ♡<%= book.favorites.count %>
+    <% end %>
+  </td>
+  <% end %>
